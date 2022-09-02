@@ -13,7 +13,7 @@ if(NOT TARGET rtac_cuda)
     find_package(rtac_cuda REQUIRED)
 endif()
 
-list(APPEND rtac_optix_PUBLIC_HEADERS
+list(APPEND rtac_optix_headers
     include/rtac_optix/Handle.h
     include/rtac_optix/Source.h
     include/rtac_optix/Nvrtc.h
@@ -48,7 +48,7 @@ list(APPEND rtac_optix_PUBLIC_HEADERS
     include/rtac_optix/helpers/maths.h
     include/rtac_optix/helpers/PinholeCamera.h
 )
-list(APPEND rtac_optix_SOURCES
+list(APPEND rtac_optix_sources
     src/Source.cpp
     src/Nvrtc.cpp
     src/Context.cpp
@@ -70,9 +70,8 @@ list(APPEND rtac_optix_SOURCES
     src/GroupInstance.cpp
 )
 
-add_library(rtac_optix SHARED ${rtac_optix_SOURCES})
+add_library(rtac_optix SHARED ${rtac_optix_sources})
 set_target_properties(rtac_optix PROPERTIES 
-    RTAC_PUBLIC_HEADERS "${rtac_optix_PUBLIC_HEADERS}"
     INSTALL_RPATH_USE_LINK_PATH True
     CUDA_ARCHITECTURES native
 )
@@ -89,6 +88,7 @@ target_link_libraries(rtac_optix PUBLIC
     rtac_cuda
 )
 rtac_install_target(rtac_optix
+    HEADER_FILES ${rtac_optix_headers}
     ADDITIONAL_CONFIG_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/cmake/FindOptiX.cmake
         ${CMAKE_CURRENT_SOURCE_DIR}/cmake/rtac_target_add_ptx.cmake

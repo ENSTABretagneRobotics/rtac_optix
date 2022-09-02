@@ -1,13 +1,14 @@
 @PACKAGE_INIT@
 
-include(CMakeFindDependencyMacro)
-
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR})
-
 find_package(OptiX REQUIRED)
+
 find_package(rtac_base REQUIRED)
 find_package(rtac_cuda REQUIRED)
 
-include("${CMAKE_CURRENT_LIST_DIR}/@TARGET_EXPORT_NAME@.cmake")
-# set_and_check(@PROJECT_NAME@_INCLUDE_DIR "@PACKAGE_CMAKE_INSTALL_INCLUDEDIR@")
-check_required_components("@PROJECT_NAME@")
+include(${CMAKE_CURRENT_LIST_DIR}/rtac_target_add_ptx.cmake)
+
+include("${CMAKE_CURRENT_LIST_DIR}/@export_name@.cmake")
+set_and_check(@TARGET_NAME@_INCLUDE_DIR "@PACKAGE_CMAKE_INSTALL_INCLUDEDIR@")
+set_and_check(@TARGET_NAME@_LIB_DIR     "@PACKAGE_CMAKE_INSTALL_LIBDIR@")
+check_required_components(@TARGET_NAME@)
