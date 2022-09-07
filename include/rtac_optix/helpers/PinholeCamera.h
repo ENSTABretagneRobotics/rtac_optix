@@ -35,7 +35,7 @@ struct PinholeCamera
         // compensating aspect ratio
         float px = dim.x * (2.0f * idx.x / (dim.x - 1) - 1.0f) / dim.y; 
         float py =          2.0f * idx.y / (dim.y - 1) - 1.0f;
-        direction = normalize(px*u_ + py*v_ + w_);
+        direction = normalized(px*u_ + py*v_ + w_);
     }
 
     RTAC_HOSTDEVICE 
@@ -47,9 +47,9 @@ struct PinholeCamera
         position_ = position;
 
         float fovy = sqrtf(dot(w_,w_)); // this is to keep the same field of view.
-        w_ = normalize(target - position); 
-        u_ = normalize(cross(w_, up)); // This normalization is necessary.
-        v_ = normalize(cross(w_, u_)); // normalization not necessary in theory.
+        w_ = normalized(target - position); 
+        u_ = normalized(cross(w_, up)); // This normalization is necessary.
+        v_ = normalized(cross(w_, u_)); // normalization not necessary in theory.
 
         w_ *= fovy; // 
     }

@@ -73,7 +73,7 @@ extern "C" __global__ void __intersection__sphere()
         if(rayTmin < tmin && tmin < rayTmax) {
             // Computing normal vector (since we are in object space, the
             // normal vector is colinear to the intersection point position).
-            float3 n = normalize(rayOrigin + tmin * rayDirection);
+            float3 n = normalized(rayOrigin + tmin * rayDirection);
             optixReportIntersection(tmin,
                                     OPTIX_PRIMITIVE_TYPE_CUSTOM,
                                     __float_as_int(n.x),
@@ -83,7 +83,7 @@ extern "C" __global__ void __intersection__sphere()
         else if(rayTmin < tmax && tmax < rayTmax) {
             // Computing normal vector (since we are in object space, the
             // normal vector is colinear to the intersection point position).
-            float3 n = normalize(rayOrigin + tmax * rayDirection);
+            float3 n = normalized(rayOrigin + tmax * rayDirection);
             optixReportIntersection(tmax,
                                     OPTIX_PRIMITIVE_TYPE_CUSTOM,
                                     __float_as_int(n.x),

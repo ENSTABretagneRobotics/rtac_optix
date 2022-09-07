@@ -31,7 +31,7 @@ extern "C" __global__ void __closesthit__autosbt_rgb()
         helpers::get_triangle_hit_position());
 
     // sending a shadow ray towards light starting hitPosition
-    float3 rayDirection = normalize(data->light - hitPosition);
+    float3 rayDirection = normalized(data->light - hitPosition);
     ShadowRay sray;
     sray.trace(params.topObject, hitPosition, rayDirection, 1.0e-4);
     if(sray.tHit < 0.0f) {

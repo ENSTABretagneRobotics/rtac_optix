@@ -6,7 +6,8 @@
 
 #include <rtac_base/cuda/utils.h>
 
-#include <sutil/vec_math.h> // consider replacing this ?
+//#include <sutil/vec_math.h> // consider replacing this ? YES !
+#include <rtac_base/cuda/vec_math.h>
 
 namespace rtac { namespace optix { namespace helpers {
 
@@ -93,7 +94,7 @@ void get_triangle_hit_data(float3& position, float3& normal)
     position = (1.0f - tBary.x - tBary.y) * vertices[0] +
                                   tBary.x * vertices[1] +
                                   tBary.y * vertices[2];
-    normal = normalize(cross(vertices[1] - vertices[0], vertices[2] - vertices[1]));
+    normal = normalized(cross(vertices[1] - vertices[0], vertices[2] - vertices[1]));
 }
 
 #endif //RTAC_CUDACC
