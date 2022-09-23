@@ -22,7 +22,7 @@ int main()
     for(int i = 0; i < in.size(); i++) { 
         in[i] = i;
     }
-    std::vector<float> out(32, 0.0);
+    std::vector<float> out(in.size(), 0.0);
 
     print(in);
     print(out);
