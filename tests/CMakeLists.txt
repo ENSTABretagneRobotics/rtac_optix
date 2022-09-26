@@ -3,7 +3,6 @@ add_executable(compile_test
     src/compile_test.cu
 )
 target_link_libraries(compile_test rtac_optix)
-set_target_properties(compile_test PROPERTIES CUDA_ARCHITECTURES native)
 target_add_ptx(compile_test
     CUDA_SOURCES src/compile_test.cu
 )
@@ -17,8 +16,6 @@ foreach(filename ${test_names})
 
     add_executable(${target_name} ${filename})
     target_link_libraries(${target_name} rtac_optix)
-    set_target_properties(${target_name} PROPERTIES 
-                          CUDA_ARCHITECTURES native)
 endforeach()
 
 add_subdirectory(optix_hello)

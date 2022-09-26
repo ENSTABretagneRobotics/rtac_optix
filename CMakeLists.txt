@@ -73,7 +73,6 @@ list(APPEND rtac_optix_sources
 add_library(rtac_optix SHARED ${rtac_optix_sources})
 set_target_properties(rtac_optix PROPERTIES 
     INSTALL_RPATH_USE_LINK_PATH True
-    CUDA_ARCHITECTURES native
 )
 target_include_directories(rtac_optix
     PUBLIC

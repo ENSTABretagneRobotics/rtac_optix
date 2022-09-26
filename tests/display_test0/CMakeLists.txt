@@ -11,7 +11,6 @@ target_link_libraries(${target_name}
     rtac_optix
     rtac_display
 )
-set_target_properties(${target_name} PROPERTIES CUDA_ARCHITECTURES native)
 target_add_ptx(${target_name}
     CUDA_SOURCES src/display_test0.cu
 )
