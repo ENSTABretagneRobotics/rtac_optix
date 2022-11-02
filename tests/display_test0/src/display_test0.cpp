@@ -217,7 +217,7 @@ int main()
     
     // Preparing display
     Display display;
-    auto renderer = display.create_renderer<ImageRenderer>(View::New());
+    auto renderer = display.create_renderer<ImageRenderer>(View::Create());
 
     GLVector<uchar3> imgData(W*H);
 
