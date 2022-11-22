@@ -1,6 +1,7 @@
 #ifndef _DEF_RTAC_OPTIX_SHADER_BINDING_TABLE_H_
 #define _DEF_RTAC_OPTIX_SHADER_BINDING_TABLE_H_
 
+#include <memory>
 #include <iostream>
 #include <vector>
 #include <unordered_map>
@@ -20,8 +21,8 @@ class ShaderBindingTable : public OptixWrapper<OptixShaderBindingTable>
 {
     public:
 
-    using Ptr      = OptixWrapperHandle<ShaderBindingTable>;
-    using ConstPtr = OptixWrapperHandle<const ShaderBindingTable>;
+    using Ptr      = std::shared_ptr<ShaderBindingTable>;
+    using ConstPtr = std::shared_ptr<const ShaderBindingTable>;
 
     using Buffer = cuda::DeviceVector<uint8_t>;
 

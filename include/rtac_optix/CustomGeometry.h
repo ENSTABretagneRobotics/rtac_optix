@@ -1,6 +1,7 @@
 #ifndef _DEF_RTAC_OPTIX_CUSTOM_GEOMETRY_H_
 #define _DEF_RTAC_OPTIX_CUSTOM_GEOMETRY_H_
 
+#include <memory>
 #include <iostream>
 #include <iomanip>
 #include <cstring>
@@ -12,7 +13,6 @@
 
 #include <rtac_base/cuda/DeviceVector.h>
 
-#include <rtac_optix/Handle.h>
 #include <rtac_optix/utils.h>
 #include <rtac_optix/Context.h>
 #include <rtac_optix/OptixWrapper.h>
@@ -42,8 +42,8 @@ class CustomGeometry : public GeometryAccelStruct
 {
     public:
 
-    using Ptr      = OptixWrapperHandle<CustomGeometry>;
-    using ConstPtr = OptixWrapperHandle<const CustomGeometry>;
+    using Ptr      = std::shared_ptr<CustomGeometry>;
+    using ConstPtr = std::shared_ptr<const CustomGeometry>;
     template <typename T>
     using DeviceVector = rtac::cuda::DeviceVector<T>;
 

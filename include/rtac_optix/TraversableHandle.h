@@ -1,6 +1,7 @@
 #ifndef _DEF_RTAC_OPTIX_TRAVERSABLE_HANDLE_H_
 #define _DEF_RTAC_OPTIX_TRAVERSABLE_HANDLE_H_
 
+#include <memory>
 #include <iostream>
 
 #include <optix.h>
@@ -8,7 +9,6 @@
 // ensure proper linking.
 #include <optix_stubs.h>
 
-#include <rtac_optix/Handle.h>
 
 namespace rtac { namespace optix {
 
@@ -47,8 +47,8 @@ struct TraversableHandle
 
     public:
 
-    using Ptr      = Handle<TraversableHandle>;
-    using ConstPtr = Handle<const TraversableHandle>;
+    using Ptr      = std::shared_ptr<TraversableHandle>;
+    using ConstPtr = std::shared_ptr<const TraversableHandle>;
    
     /**
      * Implicit cast to

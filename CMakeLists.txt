@@ -14,7 +14,6 @@ if(NOT TARGET rtac_cuda)
 endif()
 
 list(APPEND rtac_optix_headers
-    include/rtac_optix/Handle.h
     include/rtac_optix/Source.h
     include/rtac_optix/Nvrtc.h
     include/rtac_optix/utils.h

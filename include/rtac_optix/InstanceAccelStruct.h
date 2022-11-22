@@ -1,6 +1,7 @@
 #ifndef _DEF_RTAC_OPTIX_INSTANCE_ACCEL_STRUCT_H_
 #define _DEF_RTAC_OPTIX_INSTANCE_ACCEL_STRUCT_H_
 
+#include <memory>
 #include <iostream>
 #include <cstring>
 #include <vector>
@@ -13,7 +14,6 @@
 #include <rtac_base/cuda/HostVector.h>
 #include <rtac_base/cuda/DeviceVector.h>
 
-#include <rtac_optix/Handle.h>
 #include <rtac_optix/utils.h>
 #include <rtac_optix/Context.h>
 #include <rtac_optix/OptixWrapper.h>
@@ -37,8 +37,8 @@ class InstanceAccelStruct : public AccelerationStruct
 {
     public:
 
-    using Ptr      = OptixWrapperHandle<InstanceAccelStruct>;
-    using ConstPtr = OptixWrapperHandle<const InstanceAccelStruct>;
+    using Ptr      = std::shared_ptr<InstanceAccelStruct>;
+    using ConstPtr = std::shared_ptr<const InstanceAccelStruct>;
 
     using Buffer    = AccelerationStruct::Buffer;
     using Instances = std::vector<Instance::ConstPtr>;

@@ -1,6 +1,7 @@
 #ifndef _DEF_RTAC_OPTIX_GEOMETRY_ACCEL_STRUCT_H_
 #define _DEF_RTAC_OPTIX_GEOMETRY_ACCEL_STRUCT_H_
 
+#include <memory>
 #include <iostream>
 
 #include <optix.h>
@@ -10,7 +11,6 @@
 
 #include <rtac_base/cuda/DeviceVector.h>
 
-#include <rtac_optix/Handle.h>
 #include <rtac_optix/Context.h>
 #include <rtac_optix/OptixWrapper.h>
 #include <rtac_optix/AccelerationStruct.h>
@@ -54,8 +54,8 @@ class GeometryAccelStruct : public AccelerationStruct
 {
     public:
 
-    using Ptr                 = OptixWrapperHandle<GeometryAccelStruct>;
-    using ConstPtr            = OptixWrapperHandle<const GeometryAccelStruct>;
+    using Ptr                 = std::shared_ptr<GeometryAccelStruct>;
+    using ConstPtr            = std::shared_ptr<const GeometryAccelStruct>;
     using Buffer              = AccelerationStruct::Buffer;
     using MaterialIndexBuffer = rtac::cuda::DeviceVector<uint8_t>;
 
@@ -74,7 +74,7 @@ class GeometryAccelStruct : public AccelerationStruct
 
     std::vector<CUdeviceptr>    geomData_;
     std::vector<unsigned int>   materialHitFlags_;
-    Handle<MaterialIndexBuffer> materialIndexes_;
+    std::shared_ptr<MaterialIndexBuffer> materialIndexes_;
 
 
     GeometryAccelStruct(const Context::ConstPtr& context,
@@ -84,7 +84,7 @@ class GeometryAccelStruct : public AccelerationStruct
     public:
     
     void material_hit_setup(const std::vector<unsigned int>& hitFlags,
-                            const Handle<MaterialIndexBuffer>& materialIndexes = nullptr);
+                            const std::shared_ptr<MaterialIndexBuffer>& materialIndexes = nullptr);
     void material_hit_setup(const std::vector<unsigned int>& hitFlags,
                             const std::vector<uint8_t>& materialIndexes);
     void clear_hit_setup();

@@ -1,6 +1,7 @@
 #ifndef _DEF_RTAC_OPTIX_SHADER_BINDING_H_
 #define _DEF_RTAC_OPTIX_SHADER_BINDING_H_
 
+#include <memory>
 #include <iostream>
 
 #include <optix.h>
@@ -8,7 +9,6 @@
 // ensure proper linking.
 #include <optix_stubs.h>
 
-#include <rtac_optix/Handle.h>
 #include <rtac_optix/utils.h>
 #include <rtac_optix/OptixWrapper.h>
 #include <rtac_optix/ProgramGroup.h>
@@ -19,8 +19,8 @@ class ShaderBindingBase : public rtac::BuildTarget
 {
     public:
 
-    using Ptr      = OptixWrapperHandle<ShaderBindingBase>;
-    using ConstPtr = OptixWrapperHandle<const ShaderBindingBase>;
+    using Ptr      = std::shared_ptr<ShaderBindingBase>;
+    using ConstPtr = std::shared_ptr<const ShaderBindingBase>;
 
     protected:
 
@@ -45,8 +45,8 @@ class ShaderBinding : public virtual ShaderBindingBase
     using ParamsType    = ParamsT;
     using SbtRecordType = SbtRecord<ParamsT>;
 
-    using Ptr      = OptixWrapperHandle<ShaderBinding<ParamsType>>;
-    using ConstPtr = OptixWrapperHandle<const ShaderBinding<ParamsType>>;
+    using Ptr      = std::shared_ptr<ShaderBinding<ParamsType>>;
+    using ConstPtr = std::shared_ptr<const ShaderBinding<ParamsType>>;
     
     protected:
 

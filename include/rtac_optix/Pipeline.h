@@ -1,6 +1,7 @@
 #ifndef _DEF_RTAC_OPTIX_PIPELINE_H_
 #define _DEF_RTAC_OPTIX_PIPELINE_H_
 
+#include <memory>
 #include <iostream>
 #include <cstring>
 #include <unordered_map>
@@ -12,7 +13,6 @@
 #include <optix_stubs.h>
 
 #include <rtac_optix/utils.h>
-#include <rtac_optix/Handle.h>
 #include <rtac_optix/Context.h>
 #include <rtac_optix/OptixWrapper.h>
 #include <rtac_optix/Module.h>
@@ -55,8 +55,8 @@ class Pipeline : public OptixWrapper<OptixPipeline>
 {
     public:
 
-    using Ptr      = OptixWrapperHandle<Pipeline>;
-    using ConstPtr = OptixWrapperHandle<const Pipeline>;
+    using Ptr      = std::shared_ptr<Pipeline>;
+    using ConstPtr = std::shared_ptr<const Pipeline>;
 
     using Modules  = std::unordered_map<std::string, Module::Ptr>;
     using Programs = std::vector<ProgramGroup::Ptr>;

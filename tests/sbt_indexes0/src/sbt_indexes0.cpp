@@ -49,7 +49,7 @@ int main()
     cube0->material_hit_setup({{OPTIX_GEOMETRY_FLAG_NONE}});
 
     // building a per-triangle material (=array of sbt index offsets)
-    rtac::optix::Handle<DeviceVector<unsigned char>> sbtIndexOffsets(new DeviceVector<unsigned char>(
+    std::shared_ptr<DeviceVector<unsigned char>> sbtIndexOffsets(new DeviceVector<unsigned char>(
         std::vector<unsigned char>({0,2,0,2,0,2,0,2,0,2,0,2})));
     cube0->material_hit_setup(std::vector<unsigned int>(3, OPTIX_GEOMETRY_FLAG_NONE),
                               sbtIndexOffsets);

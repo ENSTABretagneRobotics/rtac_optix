@@ -1,6 +1,7 @@
 #ifndef _DEF_RTAC_OPTIX_OBJECT_INSTANCE_H_
 #define _DEF_RTAC_OPTIX_OBJECT_INSTANCE_H_
 
+#include <memory>
 #include <iostream>
 #include <vector>
 
@@ -9,7 +10,6 @@
 // ensure proper linking.
 #include <optix_stubs.h>
 
-#include <rtac_optix/Handle.h>
 #include <rtac_optix/utils.h>
 #include <rtac_optix/GeometryAccelStruct.h>
 #include <rtac_optix/Instance.h>
@@ -29,8 +29,8 @@ class ObjectInstance : public Instance
 {
     public:
 
-    using Ptr       = OptixWrapperHandle<ObjectInstance>;
-    using ConstPtr  = OptixWrapperHandle<const ObjectInstance>;
+    using Ptr       = std::shared_ptr<ObjectInstance>;
+    using ConstPtr  = std::shared_ptr<const ObjectInstance>;
     using Materials = std::vector<std::pair<unsigned int, MaterialBase::ConstPtr>>;
     
     protected:

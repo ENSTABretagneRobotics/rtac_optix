@@ -37,7 +37,7 @@ int main()
     auto cubeGeom = MeshGeometry::CreateCube(context); 
     std::vector<unsigned char> idxData(12);
     for(int i = 0; i < idxData.size(); i++) { idxData[i] = i & 0x1; }
-    auto matIdx = rtac::optix::Handle<cuda::DeviceVector<unsigned char>>(
+    auto matIdx = std::shared_ptr<cuda::DeviceVector<unsigned char>>(
         new cuda::DeviceVector<unsigned char>(idxData));
     cubeGeom->material_hit_setup({OPTIX_GEOMETRY_FLAG_NONE,OPTIX_GEOMETRY_FLAG_NONE},
                                  matIdx);

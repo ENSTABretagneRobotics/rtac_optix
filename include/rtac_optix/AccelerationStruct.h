@@ -1,6 +1,7 @@
 #ifndef _RTAC_OPTIX_TRAVERSABLE_HANDLE_H_
 #define _RTAC_OPTIX_TRAVERSABLE_HANDLE_H_
 
+#include <memory>
 #include <iostream>
 #include <iomanip>
 #include <cstring>
@@ -14,7 +15,6 @@
 #include <rtac_base/cuda/DeviceVector.h>
 #include <rtac_base/cuda/HostVector.h>
 
-#include <rtac_optix/Handle.h>
 #include <rtac_optix/utils.h>
 #include <rtac_optix/Context.h>
 #include <rtac_optix/OptixWrapper.h>
@@ -48,8 +48,8 @@ class AccelerationStruct : public OptixWrapper<OptixTraversableHandle>
 {
     public:
 
-    using Ptr      = OptixWrapperHandle<AccelerationStruct>;
-    using ConstPtr = OptixWrapperHandle<const AccelerationStruct>;
+    using Ptr      = std::shared_ptr<AccelerationStruct>;
+    using ConstPtr = std::shared_ptr<const AccelerationStruct>;
 
     using BuildInput   = OptixBuildInput;
     using BuildOptions = OptixAccelBuildOptions;
@@ -64,7 +64,7 @@ class AccelerationStruct : public OptixWrapper<OptixTraversableHandle>
      * user (defaults values will be provided). It is useful if the user wants
      * to optimize the build process.
      */
-    struct BuildMeta { Handle<Buffer> buffer; CUstream stream; };
+    struct BuildMeta { std::shared_ptr<Buffer> buffer; CUstream stream; };
 
     protected:
     
@@ -89,9 +89,9 @@ class AccelerationStruct : public OptixWrapper<OptixTraversableHandle>
     BuildInput& build_input();
     BuildOptions& build_options();
 
-    void set_build_buffer(const Handle<Buffer>& buffer);
+    void set_build_buffer(const std::shared_ptr<Buffer>& buffer);
     void set_build_stream(CUstream stream);
-    void set_build_meta(const Handle<Buffer>& buffer, CUstream stream = 0);
+    void set_build_meta(const std::shared_ptr<Buffer>& buffer, CUstream stream = 0);
 
     virtual unsigned int sbt_width() const = 0;
 

@@ -1,6 +1,7 @@
 #ifndef _DEF_RTAC_OPTIX_CONTEXT_H_
 #define _DEF_RTAC_OPTIX_CONTEXT_H_
 
+#include <memory>
 #include <iostream>
 #include <iomanip>
 #include <cstring>
@@ -10,7 +11,6 @@
 // ensure proper linking.
 #include <optix_stubs.h>
 
-#include <rtac_optix/Handle.h>
 #include <rtac_optix/utils.h>
 
 namespace rtac { namespace optix {
@@ -31,8 +31,8 @@ class Context
 {
     public:
 
-    using Ptr      = Handle<Context>;
-    using ConstPtr = Handle<const Context>;
+    using Ptr      = std::shared_ptr<Context>;
+    using ConstPtr = std::shared_ptr<const Context>;
 
     static OptixDeviceContextOptions default_options();
     static void log_callback(unsigned int level, const char* tag,

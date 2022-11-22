@@ -6,13 +6,8 @@
 #include <rtac_base/types/BuildTarget.h>
 
 #include <rtac_optix/utils.h>
-#include <rtac_optix/Handle.h>
 
 namespace rtac { namespace optix {
-
-template <typename T>
-// using OptixWrapperHandle = rtac::BuildTargetHandle<T,Handle>;
-using OptixWrapperHandle = Handle<T>;
 
 /**
  * This type aims at being a generic helper to be used instead of native OptiX

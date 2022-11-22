@@ -1,6 +1,7 @@
 #ifndef _DEF_RTAC_OPTIX_MESH_GEOMETRY_H_
 #define _DEF_RTAC_OPTIX_MESH_GEOMETRY_H_
 
+#include <memory>
 #include <iostream>
 #include <iomanip>
 #include <cstring>
@@ -13,7 +14,6 @@
 #include <rtac_base/cuda/DeviceVector.h>
 #include <rtac_base/cuda/DeviceMesh.h>
 
-#include <rtac_optix/Handle.h>
 #include <rtac_optix/utils.h>
 #include <rtac_optix/Context.h>
 #include <rtac_optix/OptixWrapper.h>
@@ -39,8 +39,8 @@ class MeshGeometry : public GeometryAccelStruct
 {
     public:
 
-    using Ptr        = OptixWrapperHandle<MeshGeometry>;
-    using ConstPtr   = OptixWrapperHandle<const MeshGeometry>;
+    using Ptr        = std::shared_ptr<MeshGeometry>;
+    using ConstPtr   = std::shared_ptr<const MeshGeometry>;
     using DeviceMesh = rtac::cuda::DeviceMesh<>;
     template <typename T>
     using DeviceVector = rtac::cuda::DeviceVector<T>;

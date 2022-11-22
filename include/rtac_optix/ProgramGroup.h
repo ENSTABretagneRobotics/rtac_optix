@@ -1,6 +1,7 @@
 #ifndef _DEF_RTAC_PROGRAM_GROUP_H_
 #define _DEF_RTAC_PROGRAM_GROUP_H_
 
+#include <memory>
 #include <iostream>
 #include <sstream>
 #include <unordered_map>
@@ -11,7 +12,6 @@
 #include <optix_stubs.h>
 
 #include <rtac_optix/utils.h>
-#include <rtac_optix/Handle.h>
 #include <rtac_optix/Context.h>
 #include <rtac_optix/Module.h>
 #include <rtac_optix/OptixWrapper.h>
@@ -66,8 +66,8 @@ class ProgramGroup : public OptixWrapper<OptixProgramGroup>
 
     friend class Pipeline;
     
-    using Ptr      = OptixWrapperHandle<ProgramGroup>;
-    using ConstPtr = OptixWrapperHandle<const ProgramGroup>;
+    using Ptr      = std::shared_ptr<ProgramGroup>;
+    using ConstPtr = std::shared_ptr<const ProgramGroup>;
     
     /**
      * Simple pair of a function name and a Module to simplify the ProgramGroup

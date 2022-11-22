@@ -1,6 +1,7 @@
 #ifndef _DEF_RTAC_OPTIX_INSTANCE_H_
 #define _DEF_RTAC_OPTIX_INSTANCE_H_
 
+#include <memory>
 #include <iostream>
 #include <cstring>
 #include <array>
@@ -10,7 +11,6 @@
 // ensure proper linking.
 #include <optix_stubs.h>
 
-#include <rtac_optix/Handle.h>
 #include <rtac_optix/utils.h>
 #include <rtac_optix/OptixWrapper.h>
 #include <rtac_optix/AccelerationStruct.h>
@@ -41,8 +41,8 @@ class Instance : public OptixWrapper<OptixInstance>
 {
     public:
 
-    using Ptr      = OptixWrapperHandle<Instance>;
-    using ConstPtr = OptixWrapperHandle<const Instance>;
+    using Ptr      = std::shared_ptr<Instance>;
+    using ConstPtr = std::shared_ptr<const Instance>;
 
     const static unsigned int DefaultFlags = OPTIX_INSTANCE_FLAG_NONE;
     const static float DefaultTransform[];

@@ -152,7 +152,7 @@ void GeometryAccelStruct::do_build() const
  */
 void GeometryAccelStruct::material_hit_setup(
     const std::vector<unsigned int>& hitFlags,
-    const Handle<MaterialIndexBuffer>& materialIndexes)
+    const std::shared_ptr<MaterialIndexBuffer>& materialIndexes)
 {
     if(hitFlags.size() == 0) {
         this->bump_version();
@@ -201,7 +201,7 @@ void GeometryAccelStruct::material_hit_setup(
     const std::vector<uint8_t>& materialIndexes)
 {
     this->material_hit_setup(hitFlags,
-        Handle<MaterialIndexBuffer>(new MaterialIndexBuffer(materialIndexes)));
+        std::shared_ptr<MaterialIndexBuffer>(new MaterialIndexBuffer(materialIndexes)));
 }
 
 /**

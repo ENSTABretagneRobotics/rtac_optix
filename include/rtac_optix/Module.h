@@ -1,6 +1,7 @@
 #ifndef _DEF_RTAC_OPTIX_MODULE_H_
 #define _DEF_RTAC_OPTIX_MODULE_H_
 
+#include <memory>
 #include <iostream>
 
 #include <optix.h>
@@ -8,7 +9,6 @@
 // ensure proper linking.
 #include <optix_stubs.h>
 
-#include <rtac_optix/Handle.h>
 #include <rtac_optix/utils.h>
 #include <rtac_optix/Context.h>
 #include <rtac_optix/OptixWrapper.h>
@@ -43,8 +43,8 @@ class Module : public OptixWrapper<OptixModule>
 
     friend class Pipeline;
 
-    using Ptr      = OptixWrapperHandle<Module>;
-    using ConstPtr = OptixWrapperHandle<const Module>;
+    using Ptr      = std::shared_ptr<Module>;
+    using ConstPtr = std::shared_ptr<const Module>;
 
     using PipelineOptions = OptixPipelineCompileOptions;
     using ModuleOptions   = OptixModuleCompileOptions;

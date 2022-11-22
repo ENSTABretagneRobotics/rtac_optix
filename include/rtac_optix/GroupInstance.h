@@ -1,6 +1,7 @@
 #ifndef _DEF_RTAC_OPTIX_GROUP_INSTANCE_H_
 #define _DEF_RTAC_OPTIX_GROUP_INSTANCE_H_
 
+#include <memory>
 #include <iostream>
 #include <cstring>
 #include <array>
@@ -10,7 +11,6 @@
 // ensure proper linking.
 #include <optix_stubs.h>
 
-#include <rtac_optix/Handle.h>
 #include <rtac_optix/utils.h>
 #include <rtac_optix/Context.h>
 #include <rtac_optix/OptixWrapper.h>
@@ -23,8 +23,8 @@ class GroupInstance : public Instance
 {
     public:
 
-    using Ptr       = OptixWrapperHandle<GroupInstance>;
-    using ConstPtr  = OptixWrapperHandle<const GroupInstance>;
+    using Ptr       = std::shared_ptr<GroupInstance>;
+    using ConstPtr  = std::shared_ptr<const GroupInstance>;
     using Instances = InstanceAccelStruct::Instances;
 
     protected:

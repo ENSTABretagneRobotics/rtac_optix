@@ -1,6 +1,7 @@
 #ifndef _DEF_RTAC_OPTIX_MATERIAL_H_
 #define _DEF_RTAC_OPTIX_MATERIAL_H_
 
+#include <memory>
 #include <iostream>
 
 #include <optix.h>
@@ -8,7 +9,6 @@
 // ensure proper linking.
 #include <optix_stubs.h>
 
-#include <rtac_optix/Handle.h>
 #include <rtac_optix/utils.h>
 #include <rtac_optix/OptixWrapper.h>
 #include <rtac_optix/ProgramGroup.h>
@@ -22,8 +22,8 @@ class MaterialBase : public virtual ShaderBindingBase
     // instanciated on its own.
     public:
 
-    using Ptr      = OptixWrapperHandle<MaterialBase>;
-    using ConstPtr = OptixWrapperHandle<const MaterialBase>;
+    using Ptr      = std::shared_ptr<MaterialBase>;
+    using ConstPtr = std::shared_ptr<const MaterialBase>;
 
     protected:
 
@@ -46,8 +46,8 @@ class Material : public ShaderBinding<ParamsT>, public MaterialBase
     using ParamsType    = typename ShaderBinding<ParamsT>::ParamsType;
     using SbtRecordType = typename ShaderBinding<ParamsT>::SbtRecordType;
 
-    using Ptr      = OptixWrapperHandle<Material<RayType, ParamsType>>;
-    using ConstPtr = OptixWrapperHandle<const Material<RayType, ParamsType>>;
+    using Ptr      = std::shared_ptr<Material<RayType, ParamsType>>;
+    using ConstPtr = std::shared_ptr<const Material<RayType, ParamsType>>;
     
     protected:
 

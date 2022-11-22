@@ -48,7 +48,7 @@ AccelerationStruct::AccelerationStruct(const Context::ConstPtr& context,
     buildInput_(buildInput),
     buildOptions_(buildOptions),
     buffer_(0),
-    buildMeta_({Handle<Buffer>(nullptr), 0})
+    buildMeta_({std::shared_ptr<Buffer>(nullptr), 0})
 {}
 
 /**
@@ -184,7 +184,7 @@ AccelerationStruct::BuildOptions& AccelerationStruct::build_options()
  * @param buffer a shared pointer to a DeviceVector which will be used to hold
  *               temporary build data.
  */
-void AccelerationStruct::set_build_buffer(const Handle<Buffer>& buffer)
+void AccelerationStruct::set_build_buffer(const std::shared_ptr<Buffer>& buffer)
 {
     buildMeta_.buffer = buffer;
 }
@@ -195,7 +195,7 @@ void AccelerationStruct::set_build_buffer(const Handle<Buffer>& buffer)
 void AccelerationStruct::resize_build_buffer(size_t size) const
 {
     if(!buildMeta_.buffer) {
-        buildMeta_.buffer = Handle<Buffer>(new Buffer(size));
+        buildMeta_.buffer = std::shared_ptr<Buffer>(new Buffer(size));
     }
     else {
         buildMeta_.buffer->resize(size);
@@ -226,7 +226,7 @@ void AccelerationStruct::set_build_stream(CUstream stream)
  *               temporary build data.
  * @param stream a CUstream to run the build operation into.
  */
-void AccelerationStruct::set_build_meta(const Handle<Buffer>& buffer, CUstream stream)
+void AccelerationStruct::set_build_meta(const std::shared_ptr<Buffer>& buffer, CUstream stream)
 {
     this->set_build_buffer(buffer);
     this->set_build_stream(stream);

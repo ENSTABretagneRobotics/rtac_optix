@@ -1,13 +1,12 @@
 #ifndef _DEF_RTAC_OPTIX_SOURCE_H_
 #define _DEF_RTAC_OPTIX_SOURCE_H_
 
+#include <memory>
 #include <iostream>
 #include <sstream>
 #include <iomanip>
 #include <algorithm>
 #include <vector>
-
-#include <rtac_optix/Handle.h>
 
 namespace rtac { namespace optix {
 
@@ -15,8 +14,8 @@ class Source
 {
     public:
 
-    using Ptr      = Handle<Source>;
-    using ConstPtr = Handle<const Source>;
+    using Ptr      = std::shared_ptr<Source>;
+    using ConstPtr = std::shared_ptr<const Source>;
 
     protected:
 
