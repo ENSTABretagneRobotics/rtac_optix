@@ -56,7 +56,7 @@ class Material : public ShaderBinding<ParamsT>, public MaterialBase
     public:
 
     static Ptr Create(const ProgramGroup::Ptr& hitPrograms,
-                      const SbtRecordType& params = types::zero<SbtRecordType>());
+                      const SbtRecordType& params = rtac::zero<SbtRecordType>());
 };
 
 template <typename RayT, class ParamsT>

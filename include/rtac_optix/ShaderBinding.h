@@ -15,7 +15,7 @@
 
 namespace rtac { namespace optix {
 
-class ShaderBindingBase : public rtac::types::BuildTarget
+class ShaderBindingBase : public rtac::BuildTarget
 {
     public:
 
@@ -62,7 +62,7 @@ class ShaderBinding : public virtual ShaderBindingBase
     public:
     
     static Ptr Create(const ProgramGroup::ConstPtr& program,
-                      const SbtRecordType& params = types::zero<SbtRecordType>());
+                      const SbtRecordType& params = rtac::zero<SbtRecordType>());
 
     const SbtRecordType& record() const;
     

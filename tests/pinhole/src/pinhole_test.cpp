@@ -46,7 +46,7 @@ int main()
                                                  "src/pinhole_test.cu");
 
     // Shader binding table setup = setting program parameters
-    auto sbt = types::zero<OptixShaderBindingTable>();
+    auto sbt = rtac::zero<OptixShaderBindingTable>();
     // Is setting the record mandatory when empty ?
     RaygenRecord raygenRecord; // no parameters
     OPTIX_CHECK(optixSbtRecordPackHeader(*raygenProgram, &raygenRecord));

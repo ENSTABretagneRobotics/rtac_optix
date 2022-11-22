@@ -51,11 +51,11 @@ int main()
     //// Building mesh acceleration structure
     //auto mesh = DeviceMesh<>::cube();
 
-    //auto buildOptions = types::zero<OptixAccelBuildOptions>();
+    //auto buildOptions = rtac::zero<OptixAccelBuildOptions>();
     //buildOptions.buildFlags = OPTIX_BUILD_FLAG_NONE;
     //buildOptions.operation  = OPTIX_BUILD_OPERATION_BUILD;
 
-    //auto buildInput = types::zero<OptixBuildInput>();
+    //auto buildInput = rtac::zero<OptixBuildInput>();
     //CUdeviceptr vertexData = reinterpret_cast<CUdeviceptr>(mesh.points().data());
     //CUdeviceptr faceData   = reinterpret_cast<CUdeviceptr>(mesh.faces().data());
     //const uint32_t inputFlags[1] = {OPTIX_GEOMETRY_FLAG_NONE};
@@ -81,7 +81,7 @@ int main()
     handle->set_pre_transform(pose);
 
     // Building shader binding table
-    auto sbt = types::zero<OptixShaderBindingTable>();
+    auto sbt = rtac::zero<OptixShaderBindingTable>();
     RaygenRecord raygenRecord;
     OPTIX_CHECK(optixSbtRecordPackHeader(*raygenProgram, &raygenRecord));
     cudaMalloc((void**)&sbt.raygenRecord, sizeof(RaygenRecord));
@@ -108,7 +108,7 @@ int main()
     // output buffer
     DeviceVector<uchar3> imgData(W*H);
 
-    auto params = types::zero<Params>();
+    auto params = rtac::zero<Params>();
     params.width     = W;
     params.height    = H;
     params.imageData = imgData.data();

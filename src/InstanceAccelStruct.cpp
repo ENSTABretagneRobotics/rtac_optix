@@ -8,7 +8,7 @@ namespace rtac { namespace optix {
  */
 InstanceAccelStruct::BuildInput InstanceAccelStruct::default_build_input()
 {
-    auto res = types::zero<BuildInput>();
+    auto res = rtac::zero<BuildInput>();
     res.type = OPTIX_BUILD_INPUT_TYPE_INSTANCES;
     return res;
 }

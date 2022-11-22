@@ -11,7 +11,6 @@ using namespace rtac::time;
 
 #include <rtac_base/types/common.h>
 #include <rtac_base/types/Mesh.h>
-using namespace rtac::types;
 
 #include <rtac_base/cuda/utils.h>
 #include <rtac_base/cuda/DeviceVector.h>
@@ -55,7 +54,7 @@ using ClosestHitRecord = SbtRecord<ClosestHitData>;
 
 DeviceVector<float2> compute_cube_uv()
 {
-    auto cube = rtac::types::Mesh<Vector3<float>>::cube(0.5);
+    auto cube = rtac::Mesh<Vector3<float>>::cube(0.5);
 
     Vector3<float> x0({1.0f,0.0f,0.0f});
     Vector3<float> y0({0.0f,1.0f,0.0f});
@@ -167,7 +166,7 @@ int main()
     auto uvBuffer = compute_cube_uv();
     
     // setting up sbt
-    auto sbt = types::zero<OptixShaderBindingTable>();
+    auto sbt = rtac::zero<OptixShaderBindingTable>();
 
     RaygenRecord raygenRecord;
     OPTIX_CHECK( optixSbtRecordPackHeader(*raygenProgram, &raygenRecord) );
@@ -207,7 +206,7 @@ int main()
 
     float3 camPos({5.0f,4.0f,3.0f});
     float3 camTarget({0.0f,0.0f,0.0f});
-    auto params = types::zero<Params>();
+    auto params = rtac::zero<Params>();
     params.width     = W;
     params.height    = H;
     //params.imageData = renderData.data();

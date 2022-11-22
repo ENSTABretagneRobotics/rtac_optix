@@ -6,7 +6,7 @@
 namespace rtac { namespace optix {
 
 template <typename T>
-using Handle = rtac::types::Handle<T>; // Is actually a std::shared_ptr
+using Handle = rtac::Handle<T>; // Is actually a std::shared_ptr
 
 }; //namespace optix
 }; //namespace rtac

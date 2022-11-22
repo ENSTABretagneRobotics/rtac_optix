@@ -30,7 +30,7 @@ namespace rtac { namespace optix {
  */
 Pipeline::CompileOptions Pipeline::default_pipeline_compile_options()
 {
-    auto res = types::zero<CompileOptions>();
+    auto res = rtac::zero<CompileOptions>();
 
     res.usesMotionBlur        = false;
     //res.traversableGraphFlags = OPTIX_TRAVERSABLE_GRAPH_FLAG_ALLOW_SINGLE_GAS;
@@ -64,7 +64,7 @@ Pipeline::CompileOptions Pipeline::default_pipeline_compile_options()
  */
 Pipeline::LinkOptions Pipeline::default_pipeline_link_options()
 {
-    auto res = types::zero<LinkOptions>();
+    auto res = rtac::zero<LinkOptions>();
 
     res.maxTraceDepth = 1;
     res.debugLevel    = OPTIX_COMPILE_DEBUG_LEVEL_FULL;
@@ -115,7 +115,7 @@ Pipeline::~Pipeline()
 }
 
 /**
- * Overrides rtac::types::BuildTarget::build method to ensure dependent
+ * Overrides rtac::BuildTarget::build method to ensure dependent
  * modules (Module) are up to date with the Pipeline compileOptions_.
  *
  * Can be called by the user but there is not much point to it. It will be

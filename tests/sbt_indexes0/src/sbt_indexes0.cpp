@@ -49,7 +49,7 @@ int main()
     cube0->material_hit_setup({{OPTIX_GEOMETRY_FLAG_NONE}});
 
     // building a per-triangle material (=array of sbt index offsets)
-    Handle<DeviceVector<unsigned char>> sbtIndexOffsets(new DeviceVector<unsigned char>(
+    rtac::optix::Handle<DeviceVector<unsigned char>> sbtIndexOffsets(new DeviceVector<unsigned char>(
         std::vector<unsigned char>({0,2,0,2,0,2,0,2,0,2,0,2})));
     cube0->material_hit_setup(std::vector<unsigned int>(3, OPTIX_GEOMETRY_FLAG_NONE),
                               sbtIndexOffsets);
@@ -71,7 +71,7 @@ int main()
     auto topTopObject = InstanceAccelStruct::Create(context);
     topTopObject->add_instance(inst2);
 
-    auto sbt = types::zero<OptixShaderBindingTable>();
+    auto sbt = rtac::zero<OptixShaderBindingTable>();
 
     RaygenRecord raygenRecord;
     OPTIX_CHECK( optixSbtRecordPackHeader(*raygen, &raygenRecord) );
@@ -106,7 +106,7 @@ int main()
     unsigned int W = 800, H = 600;
     DeviceVector<uchar3> output(W*H);
 
-    auto params = types::zero<Params>();
+    auto params = rtac::zero<Params>();
     params.width  = W;
     params.height = H;
     params.output = output.data();

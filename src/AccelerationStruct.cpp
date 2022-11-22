@@ -9,7 +9,7 @@ namespace rtac { namespace optix {
  */
 AccelerationStruct::BuildInput AccelerationStruct::default_build_input()
 {
-    return types::zero<BuildInput>();
+    return rtac::zero<BuildInput>();
 }
 
 /**
@@ -22,7 +22,7 @@ AccelerationStruct::BuildInput AccelerationStruct::default_build_input()
  */
 AccelerationStruct::BuildOptions AccelerationStruct::default_build_options()
 {
-    auto options = types::zero<BuildOptions>();
+    auto options = rtac::zero<BuildOptions>();
     options.buildFlags = OPTIX_BUILD_FLAG_NONE;
     options.operation  = OPTIX_BUILD_OPERATION_BUILD;
     return options;
@@ -100,7 +100,7 @@ void AccelerationStruct::do_build() const
         
         // Building the request for the compacted size which will be send to
         // optixAccelBuild.
-        auto propertyRequest   = types::zero<OptixAccelEmitDesc>();
+        auto propertyRequest   = rtac::zero<OptixAccelEmitDesc>();
         propertyRequest.type   = OPTIX_PROPERTY_TYPE_COMPACTED_SIZE;
         propertyRequest.result = reinterpret_cast<CUdeviceptr>(
             buildMeta_.buffer->data() + offsets.back());

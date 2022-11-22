@@ -14,7 +14,7 @@ namespace rtac { namespace optix {
  */
 OptixBuildInput CustomGeometry::default_build_input()
 {
-    auto res = types::zero<OptixBuildInput>();
+    auto res = rtac::zero<OptixBuildInput>();
     res.type = OPTIX_BUILD_INPUT_TYPE_CUSTOM_PRIMITIVES;
     res.customPrimitiveArray.numPrimitives = 1; // locking this to 1 for now.
     return res;

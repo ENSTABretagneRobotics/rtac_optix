@@ -11,7 +11,7 @@
 namespace rtac { namespace optix {
 
 template <typename T>
-// using OptixWrapperHandle = rtac::types::BuildTargetHandle<T,Handle>;
+// using OptixWrapperHandle = rtac::BuildTargetHandle<T,Handle>;
 using OptixWrapperHandle = Handle<T>;
 
 /**
@@ -25,7 +25,7 @@ using OptixWrapperHandle = Handle<T>;
  * to perform a build operation before use of an object.
  *
  * This object adresses theses issues using the build / dependency system
- * defined in the rtac::types::BuildTarget object. It allows to build a tree
+ * defined in the rtac::BuildTarget object. It allows to build a tree
  * of interdependent object which will trigger if needed the build operation of
  * its dependencies. This type is also implicitly castable to the corresponding
  * native OptiX type for seamless use in OptiX API calls.
@@ -33,7 +33,7 @@ using OptixWrapperHandle = Handle<T>;
  * @tparam T an OptiX API type.
  */
 template <typename OptixT>
-class OptixWrapper : public rtac::types::BuildTarget
+class OptixWrapper : public rtac::BuildTarget
 {
     public:
 
@@ -42,7 +42,7 @@ class OptixWrapper : public rtac::types::BuildTarget
     protected:
     
     // The optixObject_ is made mutable because of the design philosophy of
-    // rtac::types::BuildTarget. In short, only the build parameters are
+    // rtac::BuildTarget. In short, only the build parameters are
     // considered part of the observable state of the object. The build output
     // is merely considered a cache. This allows the build function to be
     // const.  The motivation is to allow dependent objects to hold a const
@@ -68,7 +68,7 @@ class OptixWrapper : public rtac::types::BuildTarget
 template <typename OptixT>
 OptixWrapper<OptixT>::OptixWrapper() : 
     BuildTarget(),
-    optixObject_(types::zero<OptixType>())
+    optixObject_(rtac::zero<OptixType>())
 {}
 
 /**

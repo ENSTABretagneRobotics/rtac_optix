@@ -58,7 +58,7 @@ RenderBuffer<T> RenderBuffer<T>::Create(unsigned int xsize,
 template <typename T>
 RenderBuffer<T> RenderBuffer<T>::Create(uint3 dims)
 {
-    auto res = types::zero<RenderBuffer<T>>();
+    auto res = rtac::zero<RenderBuffer<T>>();
     res.resize(dims);
     return res;
 }

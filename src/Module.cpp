@@ -21,7 +21,7 @@ namespace rtac { namespace optix {
  */
 Module::ModuleOptions Module::default_options()
 {
-    auto options = types::zero<ModuleOptions>();
+    auto options = rtac::zero<ModuleOptions>();
 
     options.maxRegisterCount = OPTIX_COMPILE_DEFAULT_MAX_REGISTER_COUNT;
     options.optLevel         = OPTIX_COMPILE_OPTIMIZATION_DEFAULT;

@@ -42,7 +42,7 @@ namespace rtac { namespace optix {
  * about the compile and link options more than once.
  *
  * The Pipeline, Module and ProgramGroup classes are linked together by the
- * rtac::types::BuildTarget dependency system. Any change to a Module will
+ * rtac::BuildTarget dependency system. Any change to a Module will
  * trigger the rebuild of a dependant ProgramGroup and subsequently of the
  * dependent Pipeline. This allows the user to change parameters of any object
  * without caring about keeping track of dependencies between objects.

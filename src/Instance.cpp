@@ -32,7 +32,7 @@ const float Instance::DefaultTransform[] = { 1.0f,0.0f,0.0f,0.0f,
  */
 OptixInstance Instance::default_instance(unsigned int instanceId)
 {
-    auto instance = types::zero<OptixInstance>();
+    auto instance = rtac::zero<OptixInstance>();
     instance.visibilityMask = 255;
     instance.flags          = Instance::DefaultFlags;
     instance.instanceId     = instanceId;

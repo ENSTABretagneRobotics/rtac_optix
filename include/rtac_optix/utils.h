@@ -67,7 +67,7 @@ struct SbtRecord
     __align__( OPTIX_SBT_RECORD_ALIGNMENT ) char header[OPTIX_SBT_RECORD_HEADER_SIZE];
     T data;
 
-    SbtRecord() : data(types::zero<T>()) {}
+    SbtRecord() : data(rtac::zero<T>()) {}
     SbtRecord(const T& d) : data(d) {}
 };
 

@@ -28,7 +28,7 @@ const char* ProgramGroup::Function::ContinuationCallable = "continuation_callabl
 ProgramGroup::Description ProgramGroup::empty_description(const Kind& kind,  
                                                           unsigned int flags)
 {
-    auto description = types::zero<Description>();
+    auto description = rtac::zero<Description>();
     description.kind  = kind;
     description.flags = flags;
     return description;
@@ -45,7 +45,7 @@ ProgramGroup::Description ProgramGroup::empty_description(const Kind& kind,
  */
 ProgramGroup::Options ProgramGroup::default_options()
 {
-    return types::zero<Options>();
+    return rtac::zero<Options>();
 }
 
 ProgramGroup::ProgramGroup(const Context::ConstPtr& context,
