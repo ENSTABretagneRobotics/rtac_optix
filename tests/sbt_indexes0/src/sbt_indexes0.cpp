@@ -7,7 +7,6 @@ using namespace rtac;
 
 #include <rtac_base/cuda/utils.h>
 #include <rtac_base/cuda/DeviceVector.h>
-#include <rtac_base/cuda/HostVector.h>
 using namespace rtac::cuda;
 
 #include <rtac_optix/utils.h>

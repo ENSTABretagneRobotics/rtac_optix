@@ -46,7 +46,6 @@
 using namespace std;
 
 #include <rtac_base/cuda/DeviceVector.h>
-#include <rtac_base/cuda/HostVector.h>
 #include <rtac_base/files.h>
 
 #include <optix_hello_rtac_optix/ptx_files.h>
@@ -312,7 +311,7 @@ int main( int argc, char* argv[] )
         CUDA_CHECK(cudaGetLastError());
     }
 
-    rtac::cuda::HostVector<uchar4> rgbaData(output_buffer);
+    rtac::HostVector<uchar4> rgbaData(output_buffer);
     std::vector<char> rgbData(3*width*height);
     for(int i = 0, j = 0; i < rgbaData.size(); i++) {
         rgbData[j]     = rgbaData.data()[i].x;

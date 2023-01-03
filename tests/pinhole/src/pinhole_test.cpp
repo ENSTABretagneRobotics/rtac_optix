@@ -8,7 +8,6 @@ using namespace std;
 #include <rtac_base/type_utils.h>
 #include <rtac_base/cuda/utils.h>
 #include <rtac_base/cuda/DeviceVector.h>
-#include <rtac_base/cuda/HostVector.h>
 using namespace rtac;
 using namespace rtac::cuda;
 

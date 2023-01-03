@@ -4,7 +4,6 @@ using namespace std;
 #include <rtac_base/files.h>
 #include <rtac_base/cuda/utils.h>
 #include <rtac_base/cuda/DeviceVector.h>
-#include <rtac_base/cuda/HostVector.h>
 using namespace rtac;
 
 #include <rtac_optix/utils.h>
@@ -101,7 +100,7 @@ int main()
     cudaDeviceSynchronize();
     CUDA_CHECK_LAST();
 
-    cuda::HostVector<uchar3> imgData(output);
+    HostVector<uchar3> imgData(output);
     files::write_ppm("output.ppm", W, H, (const char*) imgData.data());
 
     return 0;
