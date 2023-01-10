@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 project(rtac_optix VERSION 0.1 LANGUAGES CUDA CXX)
 
 option(BUILD_TESTS "Build unit tests." ON)
+option(BUILD_DOCS  "Build Doxygen documentation" OFF)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 find_package(OptiX REQUIRED)
@@ -97,4 +98,7 @@ if(BUILD_TESTS)
     add_subdirectory(tests)
 endif()
 
+if(BUILD_DOCS)
+    rtac_build_docs(rtac_optix)
+endif()
 
