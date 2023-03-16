@@ -82,7 +82,7 @@ int main()
     CUDA_CHECK_LAST();
 
     auto output = params.output.to_host();
-    files::write_ppm("output.ppm", W, H, (const float*)output.data());
+    //files::write_ppm("output.ppm", W, H, (const float*)output.data());
 
     return 0;
 }
