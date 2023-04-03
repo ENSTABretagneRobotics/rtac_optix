@@ -53,7 +53,7 @@ class MeshGeometry : public GeometryAccelStruct
     protected:
 
     DeviceMesh::ConstPtr sourceMesh_;
-    DeviceVector<float>    preTransform_;  // Row-major homogeneous matrix without bottom line.
+    DeviceVector<float>  preTransform_;  // Row-major homogeneous matrix without bottom line.
 
     MeshGeometry(const Context::ConstPtr& context,
                  const DeviceMesh::ConstPtr& mesh,
@@ -72,6 +72,7 @@ class MeshGeometry : public GeometryAccelStruct
     //                  const DeviceVector<float>& preTransform = DeviceVector<float>(0));
 
     void set_mesh(const DeviceMesh::ConstPtr& mesh);
+    void clear_mesh() { sourceMesh_ = nullptr; }
 
     void set_pre_transform(const DeviceVector<float>& preTransform);
     void unset_pre_transform();
