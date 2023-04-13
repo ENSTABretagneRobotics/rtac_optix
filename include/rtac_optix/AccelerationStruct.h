@@ -12,7 +12,7 @@
 #include <optix_stubs.h>
 
 #include <rtac_base/cuda/utils.h>
-#include <rtac_base/cuda/DeviceVector.h>
+#include <rtac_base/cuda/CudaVector.h>
 
 #include <rtac_optix/utils.h>
 #include <rtac_optix/Context.h>
@@ -55,7 +55,7 @@ class AccelerationStruct : public OptixWrapper<OptixTraversableHandle>
     static BuildInput   default_build_input();
     static BuildOptions default_build_options();
 
-    using Buffer = rtac::cuda::DeviceVector<unsigned char>;
+    using Buffer = rtac::cuda::CudaVector<unsigned char>;
     /** This contains the CUDA stream in which the build is performed (the
      * build operation can take a long time and several build operations can
      * run in parallel in separated CUstreams) and a temporary buffer needed

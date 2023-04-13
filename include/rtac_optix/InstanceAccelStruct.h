@@ -11,7 +11,7 @@
 // ensure proper linking.
 #include <optix_stubs.h>
 
-#include <rtac_base/cuda/DeviceVector.h>
+#include <rtac_base/cuda/CudaVector.h>
 
 #include <rtac_optix/utils.h>
 #include <rtac_optix/Context.h>
@@ -53,7 +53,7 @@ class InstanceAccelStruct : public AccelerationStruct
 
     // tmpInstanceData_ is used only for the build operation, but must stay in memory
     // because the build operation is asynchronous.
-    mutable cuda::DeviceVector<OptixInstance> tmpInstanceData_; 
+    mutable cuda::CudaVector<OptixInstance> tmpInstanceData_; 
 
     virtual void do_build() const;
 

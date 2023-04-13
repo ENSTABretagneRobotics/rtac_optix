@@ -11,7 +11,7 @@
 // ensure proper linking.
 #include <optix_stubs.h>
 
-#include <rtac_base/cuda/DeviceVector.h>
+#include <rtac_base/cuda/CudaVector.h>
 #include <rtac_base/cuda/DeviceMesh.h>
 
 #include <rtac_optix/utils.h>
@@ -43,7 +43,7 @@ class MeshGeometry : public GeometryAccelStruct
     using ConstPtr   = std::shared_ptr<const MeshGeometry>;
     using DeviceMesh = rtac::cuda::DeviceMesh<>;
     template <typename T>
-    using DeviceVector = rtac::cuda::DeviceVector<T>;
+    using CudaVector = rtac::cuda::CudaVector<T>;
 
     static OptixBuildInput        default_build_input();
     static OptixAccelBuildOptions default_build_options();
@@ -53,28 +53,28 @@ class MeshGeometry : public GeometryAccelStruct
     protected:
 
     DeviceMesh::ConstPtr sourceMesh_;
-    DeviceVector<float>  preTransform_;  // Row-major homogeneous matrix without bottom line.
+    CudaVector<float>    preTransform_;  // Row-major homogeneous matrix without bottom line.
 
     MeshGeometry(const Context::ConstPtr& context,
                  const DeviceMesh::ConstPtr& mesh,
-                 const DeviceVector<float>& preTransform = DeviceVector<float>(0));
+                 const CudaVector<float>& preTransform = CudaVector<float>(0));
 
     public:
 
     static Ptr Create(const Context::ConstPtr& context,
                       const DeviceMesh::ConstPtr& mesh,
-                      const DeviceVector<float>& preTransform = DeviceVector<float>(0));
+                      const CudaVector<float>& preTransform = CudaVector<float>(0));
     static Ptr CreateCube(const Context::ConstPtr& context,
                           float scale = 1.0f,
-                          const DeviceVector<float>& preTransform = DeviceVector<float>(0));
+                          const CudaVector<float>& preTransform = CudaVector<float>(0));
     //static Ptr Create(const Context::ConstPtr& context,
     //                  const Mesh& mesh,
-    //                  const DeviceVector<float>& preTransform = DeviceVector<float>(0));
+    //                  const CudaVector<float>& preTransform = CudaVector<float>(0));
 
     void set_mesh(const DeviceMesh::ConstPtr& mesh);
     void clear_mesh() { sourceMesh_ = nullptr; }
 
-    void set_pre_transform(const DeviceVector<float>& preTransform);
+    void set_pre_transform(const CudaVector<float>& preTransform);
     void unset_pre_transform();
 
     void enable_vertex_access();

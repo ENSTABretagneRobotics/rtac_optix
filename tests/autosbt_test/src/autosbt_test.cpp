@@ -3,7 +3,7 @@ using namespace std;
 
 #include <rtac_base/files.h>
 #include <rtac_base/cuda/utils.h>
-#include <rtac_base/cuda/DeviceVector.h>
+#include <rtac_base/cuda/CudaVector.h>
 using namespace rtac;
 
 #include <rtac_optix/utils.h>
@@ -80,7 +80,7 @@ int main()
     sbt->add_object(cube1);
 
     int W = 1024, H = 768;
-    cuda::DeviceVector<uchar3> output(W*H);
+    cuda::CudaVector<uchar3> output(W*H);
 
     Params params;
     params.width  = W;

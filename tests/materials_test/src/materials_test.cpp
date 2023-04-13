@@ -4,7 +4,7 @@ using namespace std;
 #include <rtac_base/type_utils.h>
 #include <rtac_base/files.h>
 #include <rtac_base/cuda/utils.h>
-#include <rtac_base/cuda/DeviceVector.h>
+#include <rtac_base/cuda/CudaVector.h>
 using namespace rtac;
 
 #include <rtac_optix/utils.h>
@@ -36,8 +36,8 @@ int main()
     auto cubeGeom = MeshGeometry::CreateCube(context); 
     std::vector<unsigned char> idxData(12);
     for(int i = 0; i < idxData.size(); i++) { idxData[i] = i & 0x1; }
-    auto matIdx = std::shared_ptr<cuda::DeviceVector<unsigned char>>(
-        new cuda::DeviceVector<unsigned char>(idxData));
+    auto matIdx = std::shared_ptr<cuda::CudaVector<unsigned char>>(
+        new cuda::CudaVector<unsigned char>(idxData));
     cubeGeom->material_hit_setup({OPTIX_GEOMETRY_FLAG_NONE,OPTIX_GEOMETRY_FLAG_NONE},
                                  matIdx);
 
@@ -71,13 +71,13 @@ int main()
     std::vector<SbtRecord<HitData>> hitRecords(2);
     yellow->fill_sbt_record(&hitRecords[0]);
     blue->fill_sbt_record(&hitRecords[1]);
-    cuda::DeviceVector<SbtRecord<HitData>> dHitRecords(hitRecords);
+    cuda::CudaVector<SbtRecord<HitData>> dHitRecords(hitRecords);
     sbt.hitgroupRecordBase          = (CUdeviceptr)dHitRecords.data();
     sbt.hitgroupRecordCount         = hitRecords.size();
     sbt.hitgroupRecordStrideInBytes = sizeof(SbtRecord<HitData>);
     
     int W = 1024, H = 768;
-    cuda::DeviceVector<uchar3> output(W*H);
+    cuda::CudaVector<uchar3> output(W*H);
     Params params;
     params.width = W;
     params.height = H;

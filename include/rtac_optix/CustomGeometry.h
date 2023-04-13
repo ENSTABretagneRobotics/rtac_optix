@@ -11,7 +11,7 @@
 // ensure proper linking.
 #include <optix_stubs.h>
 
-#include <rtac_base/cuda/DeviceVector.h>
+#include <rtac_base/cuda/CudaVector.h>
 
 #include <rtac_optix/utils.h>
 #include <rtac_optix/Context.h>
@@ -45,7 +45,7 @@ class CustomGeometry : public GeometryAccelStruct
     using Ptr      = std::shared_ptr<CustomGeometry>;
     using ConstPtr = std::shared_ptr<const CustomGeometry>;
     template <typename T>
-    using DeviceVector = rtac::cuda::DeviceVector<T>;
+    using CudaVector = rtac::cuda::CudaVector<T>;
 
     static OptixBuildInput        default_build_input();
     static OptixAccelBuildOptions default_build_options();
@@ -53,7 +53,7 @@ class CustomGeometry : public GeometryAccelStruct
     protected:
     
     // Axis Aligned Bounding Box.
-    DeviceVector<float> aabb_;
+    CudaVector<float> aabb_;
 
     CustomGeometry(const Context::ConstPtr& context);
 

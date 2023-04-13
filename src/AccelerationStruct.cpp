@@ -181,7 +181,7 @@ AccelerationStruct::BuildOptions& AccelerationStruct::build_options()
  * should prevent multiple temporary buffer to be created on the device and
  * lead to reduce loading time and device memory used.
  *
- * @param buffer a shared pointer to a DeviceVector which will be used to hold
+ * @param buffer a shared pointer to a CudaVector which will be used to hold
  *               temporary build data.
  */
 void AccelerationStruct::set_build_buffer(const std::shared_ptr<Buffer>& buffer)
@@ -222,7 +222,7 @@ void AccelerationStruct::set_build_stream(CUstream stream)
  * into. See AccelerationStruct::set_build_buffer and
  * AccelerationStruct::set_build_stream for more details.
  *
- * @param buffer a shared pointer to a DeviceVector which will be used to hold
+ * @param buffer a shared pointer to a CudaVector which will be used to hold
  *               temporary build data.
  * @param stream a CUstream to run the build operation into.
  */

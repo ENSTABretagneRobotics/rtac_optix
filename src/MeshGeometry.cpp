@@ -28,7 +28,7 @@ OptixAccelBuildOptions MeshGeometry::default_build_options()
 
 MeshGeometry::MeshGeometry(const Context::ConstPtr& context,
                            const DeviceMesh::ConstPtr& mesh,
-                           const DeviceVector<float>& preTransform) :
+                           const CudaVector<float>& preTransform) :
     GeometryAccelStruct(context, default_build_input(), default_build_options()),
     sourceMesh_(NULL)
 {
@@ -54,7 +54,7 @@ MeshGeometry::MeshGeometry(const Context::ConstPtr& context,
  */
 MeshGeometry::Ptr MeshGeometry::Create(const Context::ConstPtr& context,
                                        const DeviceMesh::ConstPtr& mesh,
-                                       const DeviceVector<float>& preTransform)
+                                       const CudaVector<float>& preTransform)
 {
     return Ptr(new MeshGeometry(context, mesh, preTransform));
 }
@@ -77,7 +77,7 @@ MeshGeometry::Ptr MeshGeometry::Create(const Context::ConstPtr& context,
  */
 MeshGeometry::Ptr MeshGeometry::CreateCube(const Context::ConstPtr& context,
                                            float scale,
-                                           const DeviceVector<float>& preTransform)
+                                           const CudaVector<float>& preTransform)
 {
     return Create(context, DeviceMesh::cube(scale), preTransform);
 }
@@ -100,7 +100,7 @@ MeshGeometry::Ptr MeshGeometry::CreateCube(const Context::ConstPtr& context,
 //  */
 // MeshGeometry::Ptr MeshGeometry::Create(const Context::ConstPtr& context,
 //                                        const Mesh& mesh,
-//                                        const DeviceVector<float>& preTransform)
+//                                        const CudaVector<float>& preTransform)
 // {
 //     DeviceMesh::Ptr deviceMesh(new DeviceMesh(mesh));
 //     return Ptr(new MeshGeometry(context, deviceMesh, preTransform));
@@ -170,12 +170,12 @@ void MeshGeometry::set_mesh(const DeviceMesh::ConstPtr& mesh)
  * process. The data held in sourceMesh_ will be unaffected, the operation is
  * performed internally by OptiX.
  *
- * @param preTransform a DeviceVector of size at least 12. Holds the
+ * @param preTransform a CudaVector of size at least 12. Holds the
  *                     coefficients of the first three rows of a row-major
  *                     homogeneous matrix. If the size of preTransform is 0, a
  *                     potentially already set pre_transform is unset.
  */
-void MeshGeometry::set_pre_transform(const DeviceVector<float>& preTransform)
+void MeshGeometry::set_pre_transform(const CudaVector<float>& preTransform)
 {
     if(preTransform.size() == 0) {
         this->unset_pre_transform();

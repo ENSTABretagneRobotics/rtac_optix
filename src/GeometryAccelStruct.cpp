@@ -142,7 +142,7 @@ void GeometryAccelStruct::do_build() const
  *                        materials for this GeometryAccelStruct. (and all
  *                        **material indexes** must be between 0 and
  *                        hitFlags.size()-1).
- * @param materialIndexes a handle to a DeviceVector containing the **material
+ * @param materialIndexes a handle to a CudaVector containing the **material
  *                        indexes** associated with each primitive. Values must
  *                        be between 0 and hitFlags.size()-1.
  *                        materialIndexes.size() must be equal to the number of

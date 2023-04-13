@@ -39,7 +39,7 @@ using namespace std;
 #include <optix_stack_size.h>
 #include <optix_stubs.h>
 
-#include <rtac_base/cuda/DeviceVector.h>
+#include <rtac_base/cuda/CudaVector.h>
 #include <rtac_base/files.h>
 
 #include <rtac_optix/utils.h>
@@ -241,7 +241,7 @@ int main( int argc, char* argv[] )
     //
     // launch
     //
-    rtac::cuda::DeviceVector<uchar4> output_buffer(width*height); 
+    rtac::cuda::CudaVector<uchar4> output_buffer(width*height); 
     {
         CUstream stream;
         CUDA_CHECK( cudaStreamCreate( &stream ) );

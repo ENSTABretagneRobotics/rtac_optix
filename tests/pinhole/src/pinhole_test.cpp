@@ -7,7 +7,7 @@ using namespace std;
 
 #include <rtac_base/type_utils.h>
 #include <rtac_base/cuda/utils.h>
-#include <rtac_base/cuda/DeviceVector.h>
+#include <rtac_base/cuda/CudaVector.h>
 using namespace rtac;
 using namespace rtac::cuda;
 
@@ -59,7 +59,7 @@ int main()
     sbt.missRecordCount         = 1;
     sbt.missRecordStrideInBytes = sizeof(MissRecord);
 
-    DeviceVector<float> imgData(W*H);
+    CudaVector<float> imgData(W*H);
 
     Params params;
     params.width     = W;

@@ -10,7 +10,7 @@ using namespace rtac::files;
 #include <rtac_base/types/Mesh.h>
 
 #include <rtac_base/cuda/utils.h>
-#include <rtac_base/cuda/DeviceVector.h>
+#include <rtac_base/cuda/CudaVector.h>
 #include <rtac_base/cuda/Texture2D.h>
 using namespace rtac::cuda;
 using Texture = Texture2D<float4>;
@@ -32,7 +32,7 @@ using RaygenRecord     = SbtRecord<RaygenData>;
 using MissRecord       = SbtRecord<MissData>;
 using ClosestHitRecord = SbtRecord<ClosestHitData>;
 
-DeviceVector<float2> compute_cube_uv()
+CudaVector<float2> compute_cube_uv()
 {
     auto cube = rtac::Mesh<Vector3<float>>::cube(0.5);
 
@@ -67,7 +67,7 @@ DeviceVector<float2> compute_cube_uv()
         }
     }
 
-    return DeviceVector<float2>(uv);
+    return CudaVector<float2>(uv);
 }
 
 int main()
@@ -177,12 +177,12 @@ int main()
     hitRecordsHost[2].data.sphere.radius = 1.0f;
     OPTIX_CHECK( optixSbtRecordPackHeader(*sphereHitProgram, &hitRecordsHost[2]) );
 
-    DeviceVector<ClosestHitRecord> hitRecords(hitRecordsHost);
+    CudaVector<ClosestHitRecord> hitRecords(hitRecordsHost);
     sbt.hitgroupRecordBase = reinterpret_cast<CUdeviceptr>(hitRecords.data());
     sbt.hitgroupRecordCount = 2;
     sbt.hitgroupRecordStrideInBytes = sizeof(ClosestHitRecord);
 
-    DeviceVector<uchar3> imgData(W*H);
+    CudaVector<uchar3> imgData(W*H);
 
     auto params = rtac::zero<Params>();
     params.width     = W;

@@ -106,7 +106,7 @@ int main()
 
     
     // output buffer
-    DeviceVector<uchar3> imgData(W*H);
+    CudaVector<uchar3> imgData(W*H);
 
     auto params = rtac::zero<Params>();
     params.width     = W;

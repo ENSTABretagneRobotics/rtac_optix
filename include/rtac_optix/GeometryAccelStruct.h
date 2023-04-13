@@ -9,7 +9,7 @@
 // ensure proper linking.
 #include <optix_stubs.h>
 
-#include <rtac_base/cuda/DeviceVector.h>
+#include <rtac_base/cuda/CudaVector.h>
 
 #include <rtac_optix/Context.h>
 #include <rtac_optix/OptixWrapper.h>
@@ -57,7 +57,7 @@ class GeometryAccelStruct : public AccelerationStruct
     using Ptr                 = std::shared_ptr<GeometryAccelStruct>;
     using ConstPtr            = std::shared_ptr<const GeometryAccelStruct>;
     using Buffer              = AccelerationStruct::Buffer;
-    using MaterialIndexBuffer = rtac::cuda::DeviceVector<uint8_t>;
+    using MaterialIndexBuffer = rtac::cuda::CudaVector<uint8_t>;
 
     using BuildInput   = AccelerationStruct::BuildInput;
     using BuildOptions = AccelerationStruct::BuildOptions;

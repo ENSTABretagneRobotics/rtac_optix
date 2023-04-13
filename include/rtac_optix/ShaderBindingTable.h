@@ -7,7 +7,7 @@
 #include <unordered_map>
 #include <algorithm>
 
-#include <rtac_base/cuda/DeviceVector.h>
+#include <rtac_base/cuda/CudaVector.h>
 
 #include <rtac_optix/OptixWrapper.h>
 #include <rtac_optix/ShaderBinding.h>
@@ -24,7 +24,7 @@ class ShaderBindingTable : public OptixWrapper<OptixShaderBindingTable>
     using Ptr      = std::shared_ptr<ShaderBindingTable>;
     using ConstPtr = std::shared_ptr<const ShaderBindingTable>;
 
-    using Buffer = cuda::DeviceVector<uint8_t>;
+    using Buffer = cuda::CudaVector<uint8_t>;
 
     protected:
     

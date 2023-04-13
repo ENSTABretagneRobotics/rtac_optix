@@ -45,7 +45,7 @@
 #include <string>
 using namespace std;
 
-#include <rtac_base/cuda/DeviceVector.h>
+#include <rtac_base/cuda/CudaVector.h>
 #include <rtac_base/files.h>
 
 #include <optix_hello_rtac_optix/ptx_files.h>
@@ -285,7 +285,7 @@ int main( int argc, char* argv[] )
     }
 
     // sutil::CUDAOutputBuffer<uchar4> output_buffer( sutil::CUDAOutputBufferType::CUDA_DEVICE, width, height );
-    rtac::cuda::DeviceVector<uchar4> output_buffer(width*height);
+    rtac::cuda::CudaVector<uchar4> output_buffer(width*height);
 
     //
     // launch

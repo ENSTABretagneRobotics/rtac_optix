@@ -6,7 +6,7 @@ using namespace std;
 using namespace rtac;
 
 #include <rtac_base/cuda/utils.h>
-#include <rtac_base/cuda/DeviceVector.h>
+#include <rtac_base/cuda/CudaVector.h>
 using namespace rtac::cuda;
 
 #include <rtac_optix/utils.h>
@@ -24,7 +24,7 @@ using MissRecord   = SbtRecord<MissData>;
 using HitRecord    = SbtRecord<HitData>;
 
 template<typename T>
-void print_output(unsigned int W, unsigned int H, const DeviceVector<T>& output);
+void print_output(unsigned int W, unsigned int H, const CudaVector<T>& output);
 
 int main()
 {
@@ -48,7 +48,7 @@ int main()
     cube0->material_hit_setup({{OPTIX_GEOMETRY_FLAG_NONE}});
 
     // building a per-triangle material (=array of sbt index offsets)
-    std::shared_ptr<DeviceVector<unsigned char>> sbtIndexOffsets(new DeviceVector<unsigned char>(
+    std::shared_ptr<CudaVector<unsigned char>> sbtIndexOffsets(new CudaVector<unsigned char>(
         std::vector<unsigned char>({0,2,0,2,0,2,0,2,0,2,0,2})));
     cube0->material_hit_setup(std::vector<unsigned int>(3, OPTIX_GEOMETRY_FLAG_NONE),
                               sbtIndexOffsets);
@@ -83,7 +83,7 @@ int main()
         missRecords[i].data.value = i;
         OPTIX_CHECK( optixSbtRecordPackHeader(*miss, &missRecords[i]) );
     }
-    DeviceVector<MissRecord> dMissRecords(missRecords);
+    CudaVector<MissRecord> dMissRecords(missRecords);
     sbt.missRecordBase          = (CUdeviceptr)dMissRecords.data();
     sbt.missRecordCount         = dMissRecords.size();
     sbt.missRecordStrideInBytes = sizeof(MissRecord);
@@ -94,16 +94,16 @@ int main()
         hitRecords[i].data.value = hitRecords.size() - 1 - i;
         OPTIX_CHECK( optixSbtRecordPackHeader(*hitGroup, &hitRecords[i]) );
     }
-    DeviceVector<HitRecord> dHitRecords(hitRecords);
+    CudaVector<HitRecord> dHitRecords(hitRecords);
     sbt.hitgroupRecordBase          = (CUdeviceptr)dHitRecords.data();
     sbt.hitgroupRecordCount         = hitRecords.size();
     sbt.hitgroupRecordStrideInBytes = sizeof(HitRecord);
 
     //unsigned int W = 32, H = 24;
-    //DeviceVector<unsigned char> output(W*H);
+    //CudaVector<unsigned char> output(W*H);
 
     unsigned int W = 800, H = 600;
-    DeviceVector<uchar3> output(W*H);
+    CudaVector<uchar3> output(W*H);
 
     auto params = rtac::zero<Params>();
     params.width  = W;
@@ -135,7 +135,7 @@ int main()
 }
 
 template<typename T>
-void print_output(unsigned int W, unsigned int H, const DeviceVector<T>& output)
+void print_output(unsigned int W, unsigned int H, const CudaVector<T>& output)
 {
     HostVector<T> data(output);
     for(int h = 0; h < H; h++) {
