@@ -1,17 +1,17 @@
 cmake_minimum_required(VERSION 3.10)
-project(rtac_optix VERSION 0.2 LANGUAGES CUDA CXX)
+project(rtac_optix VERSION 1.0 LANGUAGES CUDA CXX)
 
-option(BUILD_TESTS "Build unit tests." ON)
+option(BUILD_TESTS "Build unit tests." OFF)
 option(BUILD_DOCS  "Build Doxygen documentation" OFF)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 find_package(OptiX REQUIRED)
 
 if(NOT TARGET rtac_base)
-    find_package(rtac_base 0.2 REQUIRED)
+    find_package(rtac_base 1.0 REQUIRED)
 endif()
 if(NOT TARGET rtac_cuda)
-    find_package(rtac_cuda 0.2  REQUIRED)
+    find_package(rtac_cuda 1.0 REQUIRED)
 endif()
 
 list(APPEND rtac_optix_headers
